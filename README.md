@@ -1,2 +1,2 @@
 # SQL-Repo
-SQL study  
+SQL study
