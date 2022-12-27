@@ -1,0 +1,11 @@
+## 저자 별 카테고리 별 매출액 집계하기
+## 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/144856
+
+SELECT a.AUTHOR_ID, MAX(AUTHOR_NAME) as 'AUTHOR_NAME', CATEGORY
+    , SUM(SALES*PRICE) as 'TOTAL_SALES'
+FROM BOOK a
+    JOIN BOOK_SALES b ON a.BOOK_ID = b.BOOK_ID
+    JOIN AUTHOR c ON a.AUTHOR_ID = c.AUTHOR_ID
+WHERE YEAR(SALES_DATE) = 2022 and MONTH(SALES_DATE) = 1
+GROUP BY a.AUTHOR_ID, CATEGORY
+ORDER BY 1, 3 DESC;
