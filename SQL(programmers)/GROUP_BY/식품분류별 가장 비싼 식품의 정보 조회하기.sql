@@ -1,3 +1,5 @@
+-- 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/131116
+
 SELECT A.CATEGORY, A.PRICE as MAX_PRICE, A.PRODUCT_NAME
 FROM FOOD_PRODUCT A JOIN (
     SELECT CATEGORY, MAX(PRICE) as PRICE
