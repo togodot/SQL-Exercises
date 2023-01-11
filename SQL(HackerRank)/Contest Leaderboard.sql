@@ -1,5 +1,6 @@
-/* Contest Leaderboard */
-/* https://www.hackerrank.com/challenges/contest-leaderboard/problem?isFullScreen=true */
+-- < Contest Leaderboard >
+-- 문제 링크: https://www.hackerrank.com/challenges/contest-leaderboard/problem?isFullScreen=true
+-- 문제를 꼼꼼히 읽자!!
 
 select a.hacker_id, min(b.name), sum(score) as score
 from (
