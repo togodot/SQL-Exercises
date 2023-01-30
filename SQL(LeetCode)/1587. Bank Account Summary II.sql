@@ -6,4 +6,4 @@ select name, sum(amount) as balance
 from Transactions a
     join Users b on a.account = b.account
 group by name
-having sum(amount) >= 10000;
+having sum(amount) > 10000;
