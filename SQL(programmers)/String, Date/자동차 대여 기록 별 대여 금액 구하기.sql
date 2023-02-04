@@ -1,0 +1,29 @@
+-- < 자동차 대여 기록 별 대여 금액 구하기 >
+-- 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/151141
+
+-- mysql: 오류있음
+WITH temp_01 as (
+    SELECT CAR_TYPE
+        , CASE WHEN DISCOUNT_RATE = 5 THEN 0.95
+               WHEN DISCOUNT_RATE = 7 THEN 0.93 ELSE 0.9 END as DISCOUNT_RATE
+        , CASE WHEN DURATION_TYPE like '7%' THEN 7
+               WHEN DURATION_TYPE like '30%' THEN 30
+               WHEN DURATION_TYPE like '90%' THEN 90 end as DT
+    FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+    WHERE CAR_TYPE='트럭'
+),
+temp_02 as (
+    SELECT HISTORY_ID, CAR_TYPE, DAILY_FEE
+        , (DATEDIFF(END_DATE,START_DATE)+1) as DURATION
+        , CASE WHEN (DATEDIFF(END_DATE,START_DATE)+1) >= 7 THEN 7
+               WHEN (DATEDIFF(END_DATE,START_DATE)+1) >= 30 THEN 30
+               WHEN (DATEDIFF(END_DATE,START_DATE)+1) >= 90 THEN 90
+               ELSE 1 END DT
+    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY a
+        LEFT JOIN CAR_RENTAL_COMPANY_CAR b on a.CAR_ID=b.CAR_ID
+    WHERE CAR_TYPE='트럭'
+)
+SELECT HISTORY_ID, ROUND(DURATION*DAILY_FEE*DISCOUNT_RATE) as FEE
+FROM temp_02 a
+    JOIN temp_01 b ON a.DT=b.DT
+ORDER BY 2 DESC, 1 DESC;
