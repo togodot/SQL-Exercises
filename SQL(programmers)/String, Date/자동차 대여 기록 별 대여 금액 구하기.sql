@@ -1,7 +1,7 @@
 -- < 자동차 대여 기록 별 대여 금액 구하기 >
 -- 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/151141
 
--- mysql: 오류있음
+-- mysql: 오류있음 -- 수정 필요
 WITH temp_01 as (
     SELECT CAR_TYPE
         , CASE WHEN DISCOUNT_RATE = 5 THEN 0.95
