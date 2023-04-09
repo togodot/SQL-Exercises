@@ -1,0 +1,9 @@
+-- < 조건에 부합하는 중고거래 댓글 조회하기 >
+-- 문제링크: https://school.programmers.co.kr/learn/courses/30/lessons/164673
+
+SELECT TITLE, A.BOARD_ID, REPLY_ID, B.WRITER_ID, B.CONTENTS
+       , DATE_FORMAT(B.CREATED_DATE, "%Y-%m-%d") as CREATED_DATE
+FROM USED_GOODS_BOARD A
+    JOIN USED_GOODS_REPLY B ON A.BOARD_ID = B.BOARD_ID
+WHERE A.CREATED_DATE LIKE '2022-10%'
+ORDER BY B.CREATED_DATE, TITLE;
